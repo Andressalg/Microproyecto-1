@@ -1,29 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simon Says</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <header>Simon Says</header>
-        <h4>UNIMET</h4>
-        <h2>Andres Salgueiro</h2>
+    <div id="menu">
+        <h1>Simon Says</h1>
+        <input type="text" id="playerName" placeholder="Ingresa tu nombre">
+        <button id="startBtn">Comenzar Juego</button>
+        <div id="leaderboard">
+            <h3>Mejores Puntajes</h3>
+            <table id="scoresTable">
+                <thead>
+                    <tr>
+                        <th>Jugador</th>
+                        <th>Puntaje</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
-    <div>
-        <table>
-            <tr>
-                <th>
-                    Racha mas Larga
-                </th>
-            </tr>
-        </table>
+    <div id="game-container">
+        <button class="panel red">
+            <span class="back"></span>
+            <span class="front"></span>
+        </button>
+        <button class="panel blue">
+            <span class="back"></span>
+            <span class="front"></span>
+        </button>
+        <button class="panel yellow">
+            <span class="back"></span>
+            <span class="front"></span>
+        </button>
+        <button class="panel green">
+            <span class="back"></span>
+            <span class="front"></span>
+        </button>
     </div>
 
-    <div>
-        <input type="text"> <!--Pon tu nombre para empezar + INICIO -->
+    <div id="controls">
+        <p>Puntaje: <span id="score">0</span></p>
+        <p>Mejor Puntaje: <span id="bestScore">0</span></p>
+        <button id="resetBtn">Volver al Menú</button>
     </div>
+
+    <div class="modal" id="gameOverModal">
+        <h2>¡Juego Terminado!</h2>
+        <p>Puntaje final: <span id="finalScore">0</span></p>
+        <button onclick="location.reload()">Reiniciar</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
