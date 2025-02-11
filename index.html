@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--COPIAR EN TODOS LOS ARCHIVOS HTML-->
+    <link rel= "stylesheet" href="stylesheet.css">
+    <script src="nombre.js"></script>
     <title>Simon Says</title>
 </head>
 <body>
-    <div>
+    <div id="main">
         <header>Simon Says</header>
-        <h4>UNIMET</h4>
-        <h2>Andres Salgueiro</h2>
+        <h1>UNIMET</h1>
+        <h3>
+            Andres Salgueiro <br>
+            Victor Bettelli
+        </h3>
     </div>
 
     <div>
@@ -22,8 +28,15 @@
         </table>
     </div>
 
+    <br>
+
     <div>
-        <input type="text"> <!--Pon tu nombre para empezar + INICIO -->
+        <input type="text" id = "myname"> <!--Pon tu nombre para empezar-->
+        <script src="nombre.js"></script>
+        <a href="juego.html">
+            <button submit id="mysubmit">Inicio</button>
+        </a>
+        </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,35 @@
+.box {
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    border-style: solid;
+    overflow: auto;
+    size: 50px;
+}
+
+#main{
+    size: 200px;
+    overflow: auto;
+    margin: auto;
+    
+
+}
+
+#rojo{
+    background-color: red;
+
+}
+#azul{
+    background-color: blue;
+
+}
+#verde{
+    background-color: green;
+
+}
+#amarillo{
+    background-color: rgb(255, 200, 0);
+
+}
