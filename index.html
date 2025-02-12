@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
     <link rel= "stylesheet" href="stylesheet.css">
     <script src="nombre.js"></script>
     <title>Simon Says</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="main">
@@ -18,25 +19,37 @@
         </h3>
     </div>
 
-    <div>
-        <table>
-            <tr>
-                <th>
-                    Racha mas Larga
-                </th>
-            </tr>
-        </table>
+    <div id="game-container">
+        <button class="panel red">
+            <span class="back"></span>
+            <span class="front"></span>
+        </button>
+        <button class="panel blue">
+            <span class="back"></span>
+            <span class="front"></span>
+        </button>
+        <button class="panel yellow">
+            <span class="back"></span>
+            <span class="front"></span>
+        </button>
+        <button class="panel green">
+            <span class="back"></span>
+            <span class="front"></span>
+        </button>
     </div>
 
-    <br>
-
-    <div>
-        <input type="text" id = "myname"> <!--Pon tu nombre para empezar-->
-        <script src="nombre.js"></script>
-        <a href="juego.html">
-            <button submit id="mysubmit">Inicio</button>
-        </a>
-        </div>
+    <div id="controls">
+        <p>Puntaje: <span id="score">0</span></p>
+        <p>Mejor Puntaje: <span id="bestScore">0</span></p>
+        <button id="resetBtn">Volver al Menú</button>
     </div>
+
+    <div class="modal" id="gameOverModal">
+        <h2>¡Juego Terminado!</h2>
+        <p>Puntaje final: <span id="finalScore">0</span></p>
+        <button onclick="location.reload()">Reiniciar</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
