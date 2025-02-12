@@ -1,3 +1,5 @@
+/**ORGANIZAR EL RESTO **/
+
 const menu = document.getElementById('menu');
 const gameContainer = document.getElementById('game-container');
 const panels = document.querySelectorAll('.panel');

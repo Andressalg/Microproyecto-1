@@ -7,16 +7,30 @@
     <link rel= "stylesheet" href="stylesheet.css">
     <script src="nombre.js"></script>
     <title>Simon Says</title>
-    <link rel="stylesheet" href="style.css">
+     <!--COPIAR EN TODOS LOS ARCHIVOS HTML-->
+
 </head>
+
+
 <body>
-    <div id="main">
-        <header>Simon Says</header>
-        <h1>UNIMET</h1>
-        <h3>
-            Andres Salgueiro <br>
-            Victor Bettelli
-        </h3>
+    <div id="menu">
+        <h1>Simon Says</h1>
+        <h3>Victor Bettelli</h3>
+        <h3>Andres Salgueiro</h3>
+        <input type="text" id="playerName" placeholder="Ingresa tu nombre">
+        <button id="startBtn">Comenzar Juego</button>
+        <div id="leaderboard">
+            <h3>Mejores Puntajes</h3>
+            <table id="scoresTable">
+                <thead>
+                    <tr>
+                        <th>Jugador</th>
+                        <th>Puntaje</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
     <div id="game-container">

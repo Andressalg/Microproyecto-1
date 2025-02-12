@@ -1,44 +1,192 @@
-.box {
-    width: 200px;
-    height: 100px;
-    padding: 10px;
-    margin: 10px;
-    box-sizing: border-box;
-    border-style: solid;
-    overflow: auto;
-    size: 50px;
+:root {
+    --panel-size: 200px;
 }
 
-#main{
-    size: 200px;
-    overflow: auto;
-    margin: auto;
-    
-
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2c3e50;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    min-height: 100vh;
 }
 
-#rojo{
-    background-color: red;
-
-}
-#azul{
-    background-color: blue;
-
-}
-#verde{
-    background-color: green;
-
-}
-#amarillo{
-    background-color: rgb(255, 200, 0);
-
+#menu {
+    text-align: center;
+    padding: 20px;
 }
 
-#BotonJuego {
-    background-color: transparent;
-    background-repeat: no-repeat;
+#game-container {
+    position: relative;
+    width: calc(var(--panel-size) * 2 + 20px);
+    height: calc(var(--panel-size) * 2 + 20px);
+    margin: 20px;
+    display: none;
+}
+
+.panel {
+    --primary: 255, 90, 120;
+    --secondary: 150, 50, 60;
+    width: var(--panel-size);
+    height: var(--panel-size);
     border: none;
-    cursor: pointer;
-    overflow: hidden;
     outline: none;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    border-radius: 100%;
+    position: absolute;
+    transition: transform 0.3s;
+    padding: 0;
+    background: transparent;
+}
+
+.panel .back {
+    background: rgb(var(--secondary));
+    border-radius: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+}
+
+.panel .front {
+    background: linear-gradient(0deg, 
+        rgba(var(--primary), 0.6) 20%, 
+        rgba(var(--primary), 1) 50%);
+    box-shadow: 0 .5em 1em -0.2em rgba(var(--secondary), .5);
+    border-radius: 100%;
+    position: absolute;
+    border: 1px solid rgb(var(--secondary));
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-8%);
+    transition: all 0.15s;
+}
+
+.panel:active .front {
+    transform: translateY(0%);
+    box-shadow: 0 0;
+}
+
+.panel.active .front {
+    transform: translateY(0%);
+    filter: brightness(1.3);
+    box-shadow: 0 0 20px rgba(var(--primary), 0.8);
+}
+
+/* Colores específicos */
+.red {
+    --primary: 231, 76, 60;
+    --secondary: 192, 57, 43;
+    top: 0;
+    left: 0;
+    border-radius: 100% 0 0 0;
+}
+
+.blue {
+    --primary: 52, 152, 219;
+    --secondary: 41, 128, 185;
+    top: 0;
+    right: 0;
+    border-radius: 0 100% 0 0;
+}
+
+.yellow {
+    --primary: 241, 196, 15;
+    --secondary: 243, 156, 18;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 0 100%;
+}
+
+.green {
+    --primary: 46, 204, 113;
+    --secondary: 39, 174, 96;
+    bottom: 0;
+    right: 0;
+    border-radius: 0 0 100% 0;
+}
+
+#controls {
+    text-align: center;
+    margin: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #9b59b6;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #8e44ad;
+}
+
+input {
+    padding: 8px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#leaderboard {
+    margin: 20px;
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    min-width: 250px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    color: #333;
+    text-align: center;
+    z-index: 100;
+}
+
+@media (max-width: 600px) {
+    :root {
+        --panel-size: 150px;
+    }
+    
+    #game-container {
+        width: 90vw;
+        height: 90vw;
+    }
+    
+    .panel {
+        width: 45%;
+        height: 45%;
+    }
 }
