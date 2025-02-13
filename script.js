@@ -1,5 +1,3 @@
-/**ORGANIZAR EL RESTO **/
-
 const menu = document.getElementById('menu');
 const gameContainer = document.getElementById('game-container');
 const panels = document.querySelectorAll('.panel');
@@ -25,6 +23,8 @@ const soundFiles = {
 };
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+// Ejecuta Sonido
 
 function playSound(color) {
     const frequencies = {
@@ -61,6 +61,7 @@ function playSound(color) {
     vibrato.stop(audioContext.currentTime + 0.3);
 }
 
+// Actualiza la tabla de mejores puntajes
 function updateLeaderboard() {
     const scores = JSON.parse(localStorage.getItem('simonScores')) || [];
     scoresTable.innerHTML = '';
@@ -74,6 +75,7 @@ function updateLeaderboard() {
           });
 }
 
+// Guarda los valores de mejores puntajes a LocalStorage
 function saveScore() {
     const scores = JSON.parse(localStorage.getItem('simonScores')) || [];
     const existing = scores.find(entry => entry.name === currentPlayer);
@@ -90,6 +92,7 @@ function saveScore() {
     updateLeaderboard();
 }
 
+// Restricciones de iniciar el juego
 function startGame() {
     if (!playerNameInput.value.trim()) {
         alert('Por favor ingresa tu nombre');
@@ -103,6 +106,7 @@ function startGame() {
     initializeGame();
 }
 
+// Empieza el juego
 function initializeGame() {
     sequence = [];
     userSequence = [];
@@ -112,6 +116,7 @@ function initializeGame() {
     nextRound();
 }
 
+// Incrementa la cantidad de botones en cada cadena de la ronda
 function nextRound() {
     userSequence = [];
     sequence.push(getRandomColor());
@@ -120,11 +125,13 @@ function nextRound() {
     playSequence();
 }
 
+// Elemento Pseudo-random donde elige el color
 function getRandomColor() {
     const colors = ['red', 'blue', 'yellow', 'green'];
     return colors[Math.floor(Math.random() * 4)];
 }
 
+// Ejecuta la secuencia de botones
 function playSequence() {
     let i = 0;
     panels.forEach(panel => panel.style.pointerEvents = 'none');
@@ -140,6 +147,7 @@ function playSequence() {
     }, 800);
 }
 
+// ejecuta la animacion del boton
 function activatePanel(color) {
     const panel = document.querySelector(`.${color}`); // Selección por clase
     panel.classList.add('active');
@@ -147,6 +155,7 @@ function activatePanel(color) {
     setTimeout(() => panel.classList.remove('active'), 400);
 }
 
+// si el boton presionado es el correcto, el jugador se mueve a la siguiente ronda, si no, se termina el juego
 function handleClick(e) {
     const color = e.currentTarget.classList[1]; // Obtiene 'red', 'blue', etc.
     userSequence.push(color);
@@ -162,6 +171,7 @@ function handleClick(e) {
     }
 }
 
+// termina la ronda
 function gameOver() {
     gameStarted = false;
     saveScore();
