@@ -14,6 +14,7 @@ let userSequence = [];
 let score = 0;
 let gameStarted = false;
 let currentPlayer = '';
+const controls = document.getElementById('controls');
 
 const soundFiles = {
     red: 'https://actions.google.com/sounds/v1/alarms/beep_short.ogg',
@@ -208,27 +209,21 @@ function gameOver() {
 startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', () => {
     gameContainer.style.display = 'none';
+    controls.style.display = 'none'; // Ocultar controles
     gameOverModal.style.display = 'none';
     menu.style.display = 'block';
     
-    // Reinicio completo
+    // Reiniciar variables del juego
     sequence = [];
     userSequence = [];
     score = 0;
     gameStarted = false;
     scoreDisplay.textContent = '0';
     
-    disableUserInput(); // Bloquea clicks en el menú
+    disableUserInput();
     updateLeaderboard();
-    
-    // Restablecer la mejor puntuación
-    const scores = JSON.parse(localStorage.getItem('simonScores')) || [];
-    const best = Math.max(...scores.map(e => e.score), 0);
-    bestScoreDisplay.textContent = best;
-    
-    // Detener cualquier secuencia en curso
-    panels.forEach(panel => panel.style.pointerEvents = 'none');
 });
+   
 
 panels.forEach(panel => {
     panel.addEventListener('click', handleClick);
