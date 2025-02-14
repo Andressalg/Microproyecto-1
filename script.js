@@ -102,7 +102,7 @@ function startGame() {
     currentPlayer = playerNameInput.value.trim();
     menu.style.display = 'none';
     gameContainer.style.display = 'block';
-    resetBtn.style.display = 'block';
+    controls.style.display = 'block'; // Mostrar controles
     initializeGame();
 }
 
@@ -134,7 +134,7 @@ function getRandomColor() {
 // Ejecuta la secuencia de botones
 function playSequence() {
     let i = 0;
-    panels.forEach(panel => panel.style.pointerEvents = 'none');
+    disableUserInput();
     
     const interval = setInterval(() => {
         if (i < sequence.length) {
@@ -142,7 +142,9 @@ function playSequence() {
             i++;
         } else {
             clearInterval(interval);
-            panels.forEach(panel => panel.style.pointerEvents = 'auto');
+            if (gameStarted) { // Solo habilita si el juego sigue activo
+                enableUserInput();
+            }
         }
     }, 800);
 }
@@ -157,7 +159,9 @@ function activatePanel(color) {
 
 // si el boton presionado es el correcto, el jugador se mueve a la siguiente ronda, si no, se termina el juego
 function handleClick(e) {
-    const color = e.currentTarget.classList[1]; // Obtiene 'red', 'blue', etc.
+    if (!gameStarted) return; // Bloquea clicks si el juego no está activo
+    
+    const color = e.currentTarget.classList[1];
     userSequence.push(color);
     activatePanel(color);
 
@@ -167,8 +171,25 @@ function handleClick(e) {
     }
 
     if (userSequence.length === sequence.length) {
+        disableUserInput(); // Bloquea interacción hasta nueva ronda
         setTimeout(nextRound, 1000);
     }
+}
+
+
+
+function disableUserInput() {
+    panels.forEach(panel => {
+        panel.style.pointerEvents = 'none';
+        panel.style.cursor = 'not-allowed';
+    });
+}
+
+function enableUserInput() {
+    panels.forEach(panel => {
+        panel.style.pointerEvents = 'auto';
+        panel.style.cursor = 'pointer';
+    });
 }
 
 // termina la ronda
@@ -177,25 +198,26 @@ function gameOver() {
     saveScore();
     gameOverModal.style.display = 'block';
     document.getElementById('finalScore').textContent = score;
+    
+    disableUserInput(); // Asegura bloquear los clicks
+    panels.forEach(panel => panel.style.pointerEvents = 'none');
 }
 
 // Event Listeners
 startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', () => {
-    // Ocultar elementos del juego
     gameContainer.style.display = 'none';
     gameOverModal.style.display = 'none';
-    
-    // Mostrar menú principal
     menu.style.display = 'block';
     
-    // Reiniciar variables del juego
+    // Reinicio completo
     sequence = [];
     userSequence = [];
     score = 0;
     gameStarted = false;
+    scoreDisplay.textContent = '0';
     
-    // Actualizar leaderboard
+    disableUserInput(); // Bloquea clicks en el menú
     updateLeaderboard();
     
     // Restablecer la mejor puntuación
@@ -213,5 +235,6 @@ panels.forEach(panel => {
 
 // Inicialización
 updateLeaderboard();
-const bestScore = Math.max(...JSON.parse(localStorage.getItem('simonScores') || '[]').map(e => e.score) || [0]);
-bestScoreDisplay.textContent = bestScore;
+const scores = JSON.parse(localStorage.getItem('simonScores')) || [];
+const best = Math.max(...scores.map(e => e.score), 0);
+bestScoreDisplay.textContent = best;
