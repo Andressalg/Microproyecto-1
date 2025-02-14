@@ -111,19 +111,18 @@ function initializeGame() {
     sequence = [];
     userSequence = [];
     score = 0;
-    scoreDisplay.textContent = '0';
+    scoreDisplay.textContent = '0'; // Muestra 0 inicialmente
     gameStarted = true;
-    nextRound();
+    nextRound(); // Ahora nextRound no incrementa el score
 }
 
 // Incrementa la cantidad de botones en cada cadena de la ronda
 function nextRound() {
     userSequence = [];
     sequence.push(getRandomColor());
-    score++;
-    scoreDisplay.textContent = score;
     playSequence();
 }
+
 
 // Elemento Pseudo-random donde elige el color
 function getRandomColor() {
@@ -159,7 +158,7 @@ function activatePanel(color) {
 
 // si el boton presionado es el correcto, el jugador se mueve a la siguiente ronda, si no, se termina el juego
 function handleClick(e) {
-    if (!gameStarted) return; // Bloquea clicks si el juego no está activo
+    if (!gameStarted) return;
     
     const color = e.currentTarget.classList[1];
     userSequence.push(color);
@@ -171,7 +170,9 @@ function handleClick(e) {
     }
 
     if (userSequence.length === sequence.length) {
-        disableUserInput(); // Bloquea interacción hasta nueva ronda
+        score++; // Incrementa solo cuando se completa la ronda
+        scoreDisplay.textContent = score;
+        disableUserInput();
         setTimeout(nextRound, 1000);
     }
 }
